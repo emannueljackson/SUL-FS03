@@ -1,0 +1,49 @@
+import http from 'node:http'
+
+const server = http.createServer(function (request, response) {
+    switch(request.url) {
+        case '/':
+            response.end(`
+            <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Document</title>
+                    <style>
+                        .erro {
+                            display: none;
+                        }
+                        .erro.ativo {
+                            display: block;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <form novalidate>
+                        <input type="text" name="nome">
+                        <span class="erro">O nome é inválido</span>
+                        <button>Enviar</button>
+                    </form>
+                    <script>
+                        const nome = document.querySelector('[name="nome"]')
+                        const span = document.querySelector('span')
+                        const form = document.querySelector('form')
+                        form.addEventListener('submit', function (event) {
+                            span.classList.remove('ativo')
+                            if (nome.value.length === 0) {
+                                span.classList.add('ativo')
+                                event.preventDefault()
+                            }
+                        })
+                    </script>
+                </body>
+                </html>
+            `)
+            break;
+    }
+})
+
+server.listen(8080, function () {
+    console.log('server is alive on http://localhost:8080')
+})
