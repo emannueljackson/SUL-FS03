@@ -4,7 +4,7 @@ import fs from 'node:fs/promises'
 const host = 'localhost'
 const port = 8080
 
-const server = http.createServer(function (request, response) {
+const server = http.createServer(function (request, response) 
     switch (request.url) {
         case '/pessoas':
             fs.readFile('./pessoas.json')
